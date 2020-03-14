@@ -7,7 +7,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 /**
- * Created by @Boki on Jan, 2020
+ * Created by @Boki on Mar, 2020
  */
 public class BeeceptorTests extends BaseApiTest {
 

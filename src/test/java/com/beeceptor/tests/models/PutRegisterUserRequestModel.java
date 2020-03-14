@@ -4,7 +4,7 @@ package com.beeceptor.tests.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by @Boki on Mart, 2020
+ * Created by @Boki on Mar, 2020
  */
 public class PutRegisterUserRequestModel {
 

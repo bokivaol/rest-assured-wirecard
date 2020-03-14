@@ -7,7 +7,7 @@ import io.restassured.response.Response;
 import java.util.List;
 
 /**
- * Created by @Boki on Mart, 2020
+ * Created by @Boki on Mar, 2020
  */
 public class CommonMethods {
 

@@ -7,7 +7,7 @@ import io.restassured.mapper.ObjectMapperType;
 import org.testng.annotations.BeforeClass;
 
 /**
- * Created by @Boki on Jan, 2020
+ * Created by @Boki on Mar, 2020
  * Class is abstract to tell Junit to ignore this class as a Test(not to run it)
  */
 public class BaseApiTest {
