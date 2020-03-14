@@ -1,0 +1,63 @@
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// Creating task for Gradle
+//task testNG(type: Test) {
+//    useTestNG {
+//        listeners << 'org.testng.reporters.EmailableReporter'
+//        listeners << 'org.testng.reporters.FailedReporter'
+//        reports.html.enabled = false
+//    }
+//    reports.html.destination = file("$buildDir/reports/testng")
+//}
+//
+//test {
+//    reports.html.destination = file("$buildDir/reports/test")
+//
+//    dependsOn testNG
+//}
+
+test {
+    useTestNG(){
+        listeners << 'org.testng.reporters.EmailableReporter'
+        listeners << 'org.testng.reporters.FailedReporter'
+        reports.html.enabled = false
+        reports.html.destination = file("$buildDir/reports/testngReports")
+    }
+}
+
+dependencies {
+// Rest Assured
+    testImplementation 'io.rest-assured:rest-assured:4.1.2'
+
+    // Rest Assured JsonPath
+    testImplementation 'io.rest-assured:json-path:4.1.2'
+
+    // Rest Assured JSON Schema Validation
+    testImplementation 'io.rest-assured:json-schema-validator:4.1.2'
+
+    // Rest Assured XmlPath
+    testImplementation 'io.rest-assured:xml-path:4.1.2'
+
+    // Rest Assured Spring Mock Mvc
+    testImplementation 'io.rest-assured:spring-mock-mvc:4.1.2'
+
+    // https://mvnrepository.com/artifact/org.testng/testng
+    testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
+
+    // https://mvnrepository.com/artifact/com.aventstack/extentreports
+    compile group: 'com.aventstack', name: 'extentreports', version: '4.1.1'
+}
