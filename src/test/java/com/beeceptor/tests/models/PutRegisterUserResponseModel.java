@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class PutRegisterUserResponseModel {
 
-    @SerializedName("register-user-response")
+    @SerializedName("registerUserResponse")
     private RegisterUserResponse mRegisterUserResponse;
 
     public RegisterUserResponse getRegisterUserResponse() {

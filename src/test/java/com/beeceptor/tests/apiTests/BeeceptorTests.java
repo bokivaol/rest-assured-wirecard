@@ -1,9 +1,8 @@
 package com.beeceptor.tests.apiTests;
 
-import com.beeceptor.tests.models.GetCardDetailsResponseModel;
+import com.beeceptor.tests.models.*;
 import com.beeceptor.tests.steps.*;
 import com.beeceptor.tests.BaseApiTest;
-import io.restassured.response.Response;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
@@ -51,102 +50,64 @@ public class BeeceptorTests extends BaseApiTest {
 
         softAssertions.assertAll();
     }
-//
-//    @Test
-//    public void T1_get_callAll100BlogPosts_all100BlogPostsAreReceivedInResponse() {
-//        SoftAssertions softAssertions = new SoftAssertions();
-//        GetPostsSteps getPostsSteps = new GetPostsSteps();
-//
-////        Run GET request
-//        getPostsSteps.getPostsRequest();
-//
-////        Assertions starting point
-//        softAssertions.assertThat(getPostsSteps.getResponse().getStatusCode()).as("Status code is 200.")
-//                .isEqualTo(200);
-//        softAssertions.assertThat(getPostsSteps.countAllPosts()).as("Number of blog posts").isEqualTo(100);
-//
-//        softAssertions.assertAll();
-//    }
-//
-//    @Test
-//    public void T1_get_callAll10BlogPostsWrittenByUserId5_all10BlogPostsWrittenByUserId5AreReceivedInResponse() {
-//        int userId = 5;
-//        SoftAssertions softAssertions = new SoftAssertions();
-//        GetPostsByUserIdSteps getPostsByUserIdSteps = new GetPostsByUserIdSteps();
-//
-////        Run GET request
-//        getPostsByUserIdSteps.getPostsByUserId(userId);
-//
-////        Assertions starting point
-//        softAssertions.assertThat(getPostsByUserIdSteps.getResponse().getStatusCode()).as("Status code is 200.")
-//                .isEqualTo(200);
-////        Assertion that returned number of blog posts written by UserId=5 is 10
-//        softAssertions.assertThat(getPostsByUserIdSteps.countAllPosts()).as("Number of blog posts written by user whose userID").isEqualTo(10);
-//
-//        softAssertions.assertAll();
-//    }
-//
-//    @Test
-//    public void T3_put_idInPostsBodyPayloadIsNumberAsStringNotAsInt_blogPostIsSuccessfullyUpdated() {
-//        SoftAssertions softAssertions = new SoftAssertions();
-//        PutUpdatePostSteps putUpdatePostSteps = new PutUpdatePostSteps();
-//
-////        Values of the payloadPostId and resourcePostId must be the same, but the data type is different.
-//        String bodyPayloadPostId = "1";
-//        int resourcePostId = 1;
-//        int userId = 1;
-//        String title = "Little";
-//        String body = "Wing";
-//
-//
-//
-////        Assertions starting point
-//        softAssertions.assertThat(putUpdatePostSteps.getResponse().getStatusCode()).as("Status code is 200.")
-//                .isEqualTo(200);
-//
-//
-//        softAssertions.assertAll();
-//    }
-//
-//    @Test
-//    public void T4_get_zeroAsBlogPostIdInResourceUri_statusCodeIs404AndEmptyJsonIsReceivedInResponse() {
-//        SoftAssertions softAssertions = new SoftAssertions();
-//        GetOnePostSteps getOnePostSteps = new GetOnePostSteps();
-//
-//        int resourcePostId = 0;
-//
-////        Run GET request
-//        getOnePostSteps.getPostByPostId(resourcePostId);
-//
-//        Response response = getOnePostSteps.getResponse();
-//
-////        Assertions starting point
-//        softAssertions.assertThat(response.getStatusCode()).as("Status code is 404.")
-//                .isEqualTo(404);
-//        softAssertions.assertThat(response.getBody().asString()).as("Body")
-//                .isEqualTo("{}");
-//
-//        softAssertions.assertAll();
-//    }
-//
-//
-//    @Test
-//    public void T5_put_updateDataUnderInvalidResourceId_userGetAnErrorMsgThatResourceIsNotFound() {
-//        SoftAssertions softAssertions = new SoftAssertions();
-//        PutUpdatePostSteps putUpdatePostSteps = new PutUpdatePostSteps();
-//
-////        Resource is letter.
-//        String bodyPayloadPostId = "1";
-//        String stringAsResourcePostId = "a";
-//        int userId = 1;
-//        String title = "Little";
-//        String body = "Wing";
-//
-//
-////        Assertions starting point
-//        softAssertions.assertThat(putUpdatePostSteps.getResponse().getStatusCode()).as("Status code is 404.")
-//                .isEqualTo(404);
-//
-//        softAssertions.assertAll();
-//    }
+
+    @Test
+    public void putRegisterUser(){
+        SoftAssertions softAssertions = new SoftAssertions();
+
+        PutRegisterUserRequestModel putRegisterUserRequestModel = new PutRegisterUserRequestModel();
+
+        User createdUser = new User();
+        createdUser.setSalutation("MR");
+        createdUser.setFirstName("John");
+        createdUser.setLastName("Smith");
+        createdUser.setBirthDate("1992-09-24");
+        createdUser.setMobileNumber("+491234567890");
+        createdUser.setEmail("abc@def.co.de");
+        createdUser.setLoginName("johnsmith1980");
+        createdUser.setPassword("Johnny_1992");
+
+        putRegisterUserRequestModel.setUser(createdUser);
+
+        PutRegisterUserSteps registerUserSteps = new PutRegisterUserSteps();
+        registerUserSteps.callRegisterUser(putRegisterUserRequestModel);
+
+        PutRegisterUserResponseModel responseModel = registerUserSteps.SerializePutUpdateResponse();
+
+        softAssertions.assertThat(registerUserSteps.getResponse().getStatusCode()).as("Status code is 200.")
+                .isEqualTo(200);
+        softAssertions.assertThat(responseModel.getRegisterUserResponse().getLoginName()).as("Login name")
+                .isEqualTo("johnsmith1980");
+        softAssertions.assertThat(responseModel.getRegisterUserResponse().getStatus()).as("User status")
+                .isEqualTo("ACTIVE");
+        softAssertions.assertThat(responseModel.getRegisterUserResponse().getPan()).as("Card PAN")
+                .isEqualTo("4123456789012345");
+
+        softAssertions.assertAll();
+    }
+
+    @Test
+    public void putLockCard(){
+        SoftAssertions softAssertions = new SoftAssertions();
+
+        PutLockCardRequestModel putLockCardRequestModel = new PutLockCardRequestModel();
+
+        CardLock cardLock = new CardLock();
+        cardLock.setLockingReason("lost card");
+
+        putLockCardRequestModel.setCardLock(cardLock);
+
+        PutLockCardSteps lockCardSteps = new PutLockCardSteps();
+        lockCardSteps.callLockCard(putLockCardRequestModel);
+
+        PutLockCardResponseModel responseModel = lockCardSteps.SerializePutUpdateResponse();
+
+        softAssertions.assertThat(lockCardSteps.getResponse().getStatusCode()).as("Status code is 200.")
+                .isEqualTo(200);
+        softAssertions.assertThat(responseModel.getStatus()).as("Card status")
+                .isEqualTo("LOCKED");
+
+        softAssertions.assertAll();
+    }
+
 }

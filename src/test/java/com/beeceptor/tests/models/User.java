@@ -7,17 +7,17 @@ import com.google.gson.annotations.SerializedName;
  */
 public class User {
 
-    @SerializedName("birth-date")
+    @SerializedName("birthDate")
     private String mBirthDate;
     @SerializedName("email")
     private String mEmail;
-    @SerializedName("first-name")
+    @SerializedName("firstName")
     private String mFirstName;
-    @SerializedName("last-name")
+    @SerializedName("lastName")
     private String mLastName;
-    @SerializedName("login-name")
+    @SerializedName("loginName")
     private String mLoginName;
-    @SerializedName("mobile-number")
+    @SerializedName("mobileNumber")
     private String mMobileNumber;
     @SerializedName("password")
     private String mPassword;

@@ -2,6 +2,7 @@ package com.beeceptor.tests.steps;
 
 import com.beeceptor.tests.models.PutRegisterUserRequestModel;
 import com.beeceptor.tests.models.PutRegisterUserResponseModel;
+import com.beeceptor.tests.models.User;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

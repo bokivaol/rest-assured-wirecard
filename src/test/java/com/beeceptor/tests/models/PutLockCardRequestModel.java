@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class PutLockCardRequestModel {
 
-    @SerializedName("card-lock")
+    @SerializedName("cardLock")
     private CardLock mCardLock;
 
     public CardLock getCardLock() {

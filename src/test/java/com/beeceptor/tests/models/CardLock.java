@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class CardLock {
 
-    @SerializedName("locking-reason")
+    @SerializedName("lockingReason")
     private String mLockingReason;
 
     public String getLockingReason() {
