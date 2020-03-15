@@ -15,6 +15,7 @@ public class BaseApiTest {
     public void setup() {
 //		Needed not to check SSL cert
         RestAssured.useRelaxedHTTPSValidation();
+
 //		GSON over Jackson
         RestAssured.given().config(RestAssuredConfig.config().objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON)));
 
